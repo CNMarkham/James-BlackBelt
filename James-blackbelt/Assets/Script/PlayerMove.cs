@@ -7,7 +7,11 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody rb;
 
+    public float jetpackForce = 2;
     public float jumpForce = 15f;
+    public float MaxHeatAmount;
+    public float heatcountdown;
+    public bool jetpackToggle;
     public bool isGrounded;
     public float RotationSpeed = 15f;
     public float Speed = 5f;
@@ -25,24 +29,53 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
-        move = pov.transform.forward * Speed * Time.deltaTime * vertical;
-        rb.AddForce(move, ForceMode.VelocityChange);
-
-        move = pov.transform.right * Speed * Time.deltaTime * horizontal;
-        rb.AddForce(move, ForceMode.VelocityChange);
+        move = (pov.transform.forward * Speed  * vertical * Time.deltaTime) + (pov.transform.right * Speed  * horizontal * Time.deltaTime);
+        rb.AddForce(move, ForceMode.Acceleration);
 
             pov.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0);
 
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (jetpackToggle == false)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            if (Input.GetButton("Jump"))
+            {
+                rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
+                heatcountdown -= 1 * Time.deltaTime;
+                if (heatcountdown <= 0)
+                {
+                    jetpackToggle = false;
+                    Invoke("overheat", 2.0f);
+                }
+            }
         }
 
+        if (Input.GetKeyDown(KeyCode.G) && heatcountdown > 0)
+        {
+            if (jetpackToggle == true)
+            {
+                jetpackToggle = false;
+            }
+            else
+            {
+                jetpackToggle = true;
+            }
+        }
+    }
+    void overheat()
+    {
+        heatcountdown = MaxHeatAmount;
     }
 }
