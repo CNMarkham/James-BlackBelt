@@ -36,8 +36,11 @@ public class PlayerMove : MonoBehaviour
         move = (pov.transform.forward * Speed  * vertical * Time.deltaTime) + (pov.transform.right * Speed  * horizontal * Time.deltaTime);
         rb.AddForce(move, ForceMode.Acceleration);
 
-            pov.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0);
+        //
+        Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
+        rot.x = ClampAngle(rot.x, -60f, 60f);
 
+        pov.transform.eulerAngles = rot;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
 
@@ -74,6 +77,16 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+    float ClampAngle(float angle, float from, float to)
+    {
+        // accepts e.g. -80, 80
+        if (angle < 0f) angle = 360 + angle;
+        if (angle > 180f) return Mathf.Max(angle, 360 + from);
+        return Mathf.Min(angle, to);
+    }
+
+
+
     void overheat()
     {
         heatcountdown = MaxHeatAmount;
