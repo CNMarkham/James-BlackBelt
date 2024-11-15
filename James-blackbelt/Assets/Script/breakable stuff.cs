@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class breakablebox : MonoBehaviour
 {
-    public float health;
-
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void hurtPlayer(float damgae)
+    // Update is called once per frame
+    void Update()
     {
-        health -= damgae;
-        if (health <= 0)
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Bullet>())
         {
             Destroy(this.gameObject);
         }
     }
-
-  
 }
