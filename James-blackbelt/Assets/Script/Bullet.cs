@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float Heathdecrease;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponent<Health>() != null)
         {
             collision.gameObject.GetComponent<Health>().hurtPlayer(10);
+
         }
     }
 }
