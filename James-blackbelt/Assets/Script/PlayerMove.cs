@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -17,14 +19,17 @@ public class PlayerMove : MonoBehaviour
     public float Speed = 5f;
     public Vector3 move;
     public GameObject pov;
-
+    public Slider sliderObject;
+    private TMP_Text debugHeat;
+    
     public LayerMask ground;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;
-
+        
     }
 
     // Update is called once per frame
@@ -37,7 +42,6 @@ public class PlayerMove : MonoBehaviour
         move = (pov.transform.forward * Speed  * vertical * Time.deltaTime) + (pov.transform.right * Speed  * horizontal * Time.deltaTime);
         rb.AddForce(move, ForceMode.Acceleration);
 
-        //
         Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
         rot.x = ClampAngle(rot.x, -60f, 60f);
 
@@ -58,9 +62,14 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
                 heatcountdown -= 1 * Time.deltaTime;
+                debugHeat.text = $"The Current heat is {heatcountdown}";
+                sliderObject.value = heatcountdown;
+
+                
                 if (heatcountdown <= 0)
                 {
                     jetpackToggle = false;
+
                     Invoke("overheat", 2.0f);
                 }
             }
@@ -85,8 +94,6 @@ public class PlayerMove : MonoBehaviour
         if (angle > 180f) return Mathf.Max(angle, 360 + from);
         return Mathf.Min(angle, to);
     }
-
-
 
     void overheat()
     {

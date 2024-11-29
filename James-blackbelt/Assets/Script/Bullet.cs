@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<Health>().hurtPlayer(10);
 
+
         }
     }
 }
