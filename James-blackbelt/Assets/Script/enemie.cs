@@ -33,10 +33,16 @@ public class enemie : MonoBehaviour
            // Debug.Log(Vector3.Distance(destination, target.transform.position));
             destination = target.transform.position;
             agent.destination = destination;
-
-            GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
-            clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);   
+            StartCoroutine(ShootProjectile(5));
 
         }
+    }
+
+    IEnumerator ShootProjectile(float reloadTime)
+    {
+        yield return new WaitForSeconds(reloadTime);
+        GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+        clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+        yield return new WaitForSeconds(reloadTime);
     }
 }

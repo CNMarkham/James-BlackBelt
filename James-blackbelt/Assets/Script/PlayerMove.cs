@@ -19,9 +19,11 @@ public class PlayerMove : MonoBehaviour
     public float Speed = 5f;
     public Vector3 move;
     public GameObject pov;
-    public Slider sliderObject;
+    public Slider heatsliderObject;
+    public Slider healthsliderObject;
     private TMP_Text debugHeat;
-    
+    public float Damage;
+
     public LayerMask ground;
     // Start is called before the first frame update
     void Start()
@@ -29,9 +31,10 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;
-        
+        heatcountdown = 10;
+        Damage = 10;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -62,8 +65,8 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
                 heatcountdown -= 1 * Time.deltaTime;
-                debugHeat.text = $"The Current heat is {heatcountdown}";
-                sliderObject.value = heatcountdown;
+                debugHeat.text = $"The Current heat is {Mathf.RoundToInt(heatcountdown)}";
+                heatsliderObject.value = heatcountdown;
 
                 
                 if (heatcountdown <= 0)
@@ -93,6 +96,16 @@ public class PlayerMove : MonoBehaviour
         if (angle < 0f) angle = 360 + angle;
         if (angle > 180f) return Mathf.Max(angle, 360 + from);
         return Mathf.Min(angle, to);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Health>() != null)
+        {
+            collision.gameObject.GetComponent<Health>().hurtPlayer(10);
+            Damage -= 10 * Time.deltaTime;
+            healthsliderObject.value = Damage;
+        }
     }
 
     void overheat()
