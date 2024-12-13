@@ -23,6 +23,8 @@ public class PlayerMove : MonoBehaviour
     public Slider healthsliderObject;
     private TMP_Text debugHeat;
     public float Damage;
+    public bool heatGain;
+
 
     public LayerMask ground;
     // Start is called before the first frame update
@@ -65,7 +67,8 @@ public class PlayerMove : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
                 heatcountdown -= 1 * Time.deltaTime;
-                debugHeat.text = $"The Current heat is {Mathf.RoundToInt(heatcountdown)}";
+                string jetpackNum = string.Format("{0:0.00}", heatcountdown);
+                debugHeat.text = $"The Current heat is " + jetpackNum;
                 heatsliderObject.value = heatcountdown;
 
                 
@@ -73,9 +76,21 @@ public class PlayerMove : MonoBehaviour
                 {
                     jetpackToggle = false;
 
-                    Invoke("overheat", 2.0f);
+                    heatGain = true;
+                    //Invoke("overheat", 2.0f);
                 }
             }
+        }
+
+        if (heatGain == true)
+        {
+            heatcountdown += 1 * Time.deltaTime;
+            heatsliderObject.value = heatcountdown;
+        }
+
+        if (heatcountdown > MaxHeatAmount)
+        {
+            heatGain = false;
         }
 
         if (Input.GetKeyDown(KeyCode.G) && heatcountdown > 0)

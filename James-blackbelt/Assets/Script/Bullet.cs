@@ -13,7 +13,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(this.gameObject,5f);
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -26,6 +25,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponent<Health>() != null)
         {
             collision.gameObject.GetComponent<Health>().hurtPlayer(10);
+            Destroy(this.gameObject);
         }
     }
 }

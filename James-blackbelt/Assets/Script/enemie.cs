@@ -13,11 +13,12 @@ public class enemie : MonoBehaviour
     public GameObject bullet;
     public GameObject barrel;
     public float bulletSpeed;
+    public bool shooting;
     
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Player");
+        target = GameObject.Find("enemie goal");
         // destination = agent.destination;
         debugDistance = GameObject.Find("DistanceDebugText").GetComponent<TMP_Text>();
     }
@@ -25,24 +26,27 @@ public class enemie : MonoBehaviour
     void Update()
     {
         //debugDistance.text = Vector3.Distance(transform.position, target.transform.position).ToString();
-
+        destination = target.transform.position;
+        agent.destination = destination;
         Debug.Log(Vector3.Distance(transform.position, target.transform.position));
 
         if (Vector3.Distance(transform.position, target.transform.position) < 10.0f)
         {
-           // Debug.Log(Vector3.Distance(destination, target.transform.position));
-            destination = target.transform.position;
-            agent.destination = destination;
-            StartCoroutine(ShootProjectile(5));
+            if (shooting == false)
+            {
+                StartCoroutine(ShootProjectile(1));
+            }
 
         }
     }
 
     IEnumerator ShootProjectile(float reloadTime)
     {
+        shooting = true;
         yield return new WaitForSeconds(reloadTime);
         GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
         clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
         yield return new WaitForSeconds(reloadTime);
+        shooting = false;
     }
 }
