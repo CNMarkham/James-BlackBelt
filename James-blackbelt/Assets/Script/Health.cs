@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
         
     }
 
-    public void hurtPlayer(float damgae)
+    public virtual void hurtPlayer(float damgae)
     {
         health -= damgae;
         if (health <= 0)
