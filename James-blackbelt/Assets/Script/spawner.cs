@@ -6,17 +6,17 @@ public class spawner : MonoBehaviour
 {
     public GameObject enemy_spawn;
     public int spawnPoint;
-    public Vector3[] spawnPos = new Vector3[9];
+    public GameObject[] spawnPos = new GameObject[9];
     void Start()
     {
-        InvokeRepeating("spawn", 2.0f, 0.3f);
+        InvokeRepeating("spawn", 2.0f, 1f);
     }
 
     void spawn()
     {
   
         spawnPoint = Random.Range(0, 8);
-        GameObject clone = Instantiate(enemy_spawn,spawnPos [spawnPoint], Quaternion.identity);
+        GameObject clone = Instantiate(enemy_spawn,spawnPos [spawnPoint].transform.position, Quaternion.identity);
     }
 
     void Update()
