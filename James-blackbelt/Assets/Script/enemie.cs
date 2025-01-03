@@ -18,9 +18,9 @@ public class enemie : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("enemie goal");
+        target = GameObject.Find("Player");
         // destination = agent.destination;
-        debugDistance = GameObject.Find("DistanceDebugText").GetComponent<TMP_Text>();
+        //debugDistance = GameObject.Find("DistanceDebugText").GetComponent<TMP_Text>();
     }
 
     void Update()
