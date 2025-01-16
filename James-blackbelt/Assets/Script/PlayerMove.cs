@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
 
     public float jetpackForce = 2;
     public float jumpForce = 15f;
-    public float MaxHeatAmount;
+    public float MaxHeatAmount = 10;
     public float heatcountdown;
     public bool jetpackToggle;
     public bool isGrounded;
@@ -34,13 +34,17 @@ public class PlayerMove : MonoBehaviour
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;
         heatcountdown = 10;
+        heatsliderObject.value = heatcountdown;
         Damage = 10;
     }
     
     // Update is called once per frame
     void Update()
     {
-      
+
+        string jetpackNum = string.Format("{0:0.00}", heatcountdown);
+        debugHeat.text = $"The Current heat is " + jetpackNum;
+
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
@@ -63,35 +67,38 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") && heatcountdown > 0)
             {
                 rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
-                heatcountdown -= 1 * Time.deltaTime;
-                string jetpackNum = string.Format("{0:0.00}", heatcountdown);
-                debugHeat.text = $"The Current heat is " + jetpackNum;
+               heatcountdown -= 2 * Time.deltaTime;
+
+
+                heatcountdown = Mathf.Clamp(heatcountdown, 0,10);
                 heatsliderObject.value = heatcountdown;
+                heatGain = false;
 
-                
-                if (heatcountdown <= 0)
-                {
-                    jetpackToggle = false;
-
-                    heatGain = true;
-                    //Invoke("overheat", 2.0f);
-                }
             }
+
+
+            if (!Input.GetButton("Jump"))
+            {
+                heatGain = true;
+            }
+
+            if (heatGain == true)
+            {
+                heatcountdown +=  1 * Time.deltaTime;
+                heatcountdown = Mathf.Clamp(heatcountdown,0, 10);
+                heatsliderObject.value = heatcountdown;
+            }
+
         }
 
-        if (heatGain == true)
-        {
-            heatcountdown += 1 * Time.deltaTime;
-            heatsliderObject.value = heatcountdown;
-        }
 
-        if (heatcountdown > MaxHeatAmount)
-        {
-            heatGain = false;
-        }
+
+    
+
+
 
         if (Input.GetKeyDown(KeyCode.G) && heatcountdown > 0)
         {
