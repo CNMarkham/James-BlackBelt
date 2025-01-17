@@ -28,7 +28,7 @@ public class enemie : MonoBehaviour
         //debugDistance.text = Vector3.Distance(transform.position, target.transform.position).ToString();
         destination = target.transform.position;
         agent.destination = destination;
-        Debug.Log(Vector3.Distance(transform.position, target.transform.position));
+        //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
     
         if (Vector3.Distance(transform.position, target.transform.position) < 10.0f)
         {

@@ -96,18 +96,21 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    
 
 
-
-        if (Input.GetKeyDown(KeyCode.G) && heatcountdown > 0)
+        Debug.Log("test5");
+        Debug.Log(heatcountdown);
+        if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
         {
+            Debug.Log("test3");
             if (jetpackToggle == true)
             {
+                Debug.Log("test");
                 jetpackToggle = false;
             }
             else
             {
+                Debug.Log("test2");
                 jetpackToggle = true;
             }
         }

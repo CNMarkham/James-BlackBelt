@@ -19,11 +19,12 @@ public class win : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collided)
-    {
-        if (collided.gameObject.GetComponent<PlayerMove>() != null)
+        private void OnCollisionEnter(Collision collision)
         {
-            SceneManager.LoadScene(sceneBuildIndex: 1);
-        }
+            if (collision.gameObject.GetComponent<PlayerMove>() != null)
+            {
+                SceneManager.LoadScene(sceneBuildIndex: 1);
+            }
     }
 }
+    
