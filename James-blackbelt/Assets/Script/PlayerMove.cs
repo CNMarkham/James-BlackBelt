@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;           
         heatcountdown = 10;
         heatsliderObject.value = heatcountdown;
         Damage = 10;
@@ -98,19 +98,19 @@ public class PlayerMove : MonoBehaviour
 
 
 
-        Debug.Log("test5");
+
         Debug.Log(heatcountdown);
         if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
         {
-            Debug.Log("test3");
+
             if (jetpackToggle == true)
             {
-                Debug.Log("test");
+
                 jetpackToggle = false;
             }
             else
             {
-                Debug.Log("test2");
+
                 jetpackToggle = true;
             }
         }

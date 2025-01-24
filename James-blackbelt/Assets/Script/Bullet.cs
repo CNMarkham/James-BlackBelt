@@ -27,5 +27,10 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Health>().hurtPlayer(10);
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("breakable"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

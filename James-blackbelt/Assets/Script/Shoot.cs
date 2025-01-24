@@ -21,6 +21,11 @@ public class Shoot : MonoBehaviour
             GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
 
             clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
-        }   
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            /*GUN.SetActive(false);*/
+        }
     }
 }

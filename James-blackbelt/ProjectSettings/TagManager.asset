@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - npc target
   - Data plan
+  - breakable
   layers:
   - Default
   - TransparentFX
