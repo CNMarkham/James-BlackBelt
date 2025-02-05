@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3268077038862762269}
   - component: {fileID: 5003172582235765481}
   m_Layer: 0
-  m_Name: range
+  m_Name: air mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

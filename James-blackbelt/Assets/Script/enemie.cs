@@ -7,30 +7,34 @@ using TMPro;
 public class enemie : MonoBehaviour
 {
     private TMP_Text debugDistance;
-    public GameObject target;
+    public GameObject Findplayer;
     Vector3 destination;
     NavMeshAgent agent;
     public GameObject bullet;
     public GameObject barrel;
     public float bulletSpeed;
     public bool shooting;
-    
+
+    public Transform facePlayer;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.Find("Player");
+        Findplayer = GameObject.Find("Player");
+        facePlayer = GameObject.Find("Player").transform;
         // destination = agent.destination;
         //debugDistance = GameObject.Find("DistanceDebugText").GetComponent<TMP_Text>();
     }
 
     void Update()
     {
+        transform.LookAt(facePlayer);
         //debugDistance.text = Vector3.Distance(transform.position, target.transform.position).ToString();
-        destination = target.transform.position;
+        destination = Findplayer.transform.position;
         agent.destination = destination;
         //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
     
-        if (Vector3.Distance(transform.position, target.transform.position) < 10.0f)
+        if (Vector3.Distance(transform.position, Findplayer.transform.position) < 10.0f)
         {
             if (shooting == false)
             {
@@ -49,4 +53,10 @@ public class enemie : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         shooting = false;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+                                   
+    }
+
 }

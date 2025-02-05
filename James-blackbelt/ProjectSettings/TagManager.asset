@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Data plan
   - breakable
+  - playerBullet
   layers:
   - Default
   - TransparentFX

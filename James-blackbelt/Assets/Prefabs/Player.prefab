@@ -438,7 +438,7 @@ Transform:
   m_GameObject: {fileID: 6411693489143192404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.168, y: 0.236, z: 0.868}
+  m_LocalPosition: {x: 1.226, y: 0.286, z: 0.868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -543,7 +543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6349813221226832679
 Transform:
   m_ObjectHideFlags: 0
@@ -888,6 +888,8 @@ MonoBehaviour:
   RotationSpeed: 2116
   Speed: 1000
   move: {x: 0, y: 0, z: 0}
+  Gun: {fileID: 0}
+  Gun2: {fileID: 0}
   pov: {fileID: 7163222060568927853}
   heatsliderObject: {fileID: 0}
   healthsliderObject: {fileID: 0}

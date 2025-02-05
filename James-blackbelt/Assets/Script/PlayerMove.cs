@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     public float RotationSpeed = 15f;
     public float Speed = 5f;
     public Vector3 move;
+    public GameObject Gun;
+    public GameObject Gun2;
     public GameObject pov;
     public Slider heatsliderObject;
     public Slider healthsliderObject;
@@ -30,6 +32,8 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Gun2.SetActive(false);
+        Gun.SetActive(true);
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;           
@@ -41,6 +45,19 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown("1"))
+        {
+            Gun.SetActive(false);
+            Gun2.SetActive(true);
+        }
+
+        if (Input.GetKeyDown("2"))
+        {
+            Gun2.SetActive(false);
+            Gun.SetActive(true);
+
+        }
 
         string jetpackNum = string.Format("{0:0.00}", heatcountdown);
         debugHeat.text = $"The Current heat is " + jetpackNum;

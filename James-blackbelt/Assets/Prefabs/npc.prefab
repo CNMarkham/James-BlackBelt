@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  Hslider: {fileID: 0}
 --- !u!114 &5108273546963748044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  bullet: {fileID: 1068659263675339146, guid: 6e4b72b52b556e64896a480439a19f5d, type: 3}
+  bullet: {fileID: 1068659263675339146, guid: 9beb02e417c8fc94883dd790c4f7b85f, type: 3}
   barrel: {fileID: 8170267971347400596}
   bulletSpeed: 20
   shooting: 0
