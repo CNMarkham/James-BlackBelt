@@ -296,6 +296,8 @@ MonoBehaviour:
   bullet: {fileID: 1068659263675339146, guid: 6e4b72b52b556e64896a480439a19f5d, type: 3}
   barrel: {fileID: 1891533761}
   barrel2: {fileID: 1260321201}
+  CameraRotation: {fileID: 1692086683}
+  range: 100
   bulletSpeed: 50
 --- !u!1 &481020848 stripped
 GameObject:
@@ -857,6 +859,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e951264d1babf614e8fbdbd7a6c6cc86, type: 3}
+--- !u!1 &1692086683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7163222060568927853, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
+  m_PrefabInstance: {fileID: 1459730023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1696018406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6917143613485780554, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}

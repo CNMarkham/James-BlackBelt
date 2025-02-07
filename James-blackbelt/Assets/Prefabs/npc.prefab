@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3276331980239743992}
-  - component: {fileID: 491403301885307992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,19 +34,6 @@ Transform:
   - {fileID: 2371416108305204774}
   m_Father: {fileID: 7220140353290213307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &491403301885307992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622791872392247920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72f10b70dd0e604ea2e4b4d93c4feef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &1685772763721735931
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +45,7 @@ GameObject:
   - component: {fileID: 5772638964348394486}
   - component: {fileID: 1819832998815749101}
   - component: {fileID: 4620382188539713984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7220140353290213307}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GUN (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +165,7 @@ GameObject:
   - component: {fileID: 6854758722245091669}
   - component: {fileID: 5108273546963748044}
   - component: {fileID: 4521996306787164778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +295,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6771501632467125010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b884f037604b8c4a9980b22d7d87a7c, type: 3}
   m_Name: 
@@ -328,11 +314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025b9e7af83e6524e80c38998c9137f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  Findplayer: {fileID: 0}
   bullet: {fileID: 1068659263675339146, guid: 9beb02e417c8fc94883dd790c4f7b85f, type: 3}
   barrel: {fileID: 8170267971347400596}
+  health: 50
   bulletSpeed: 20
   shooting: 0
+  facePlayer: {fileID: 0}
 --- !u!195 &4521996306787164778
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -364,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2371416108305204774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCbarrel
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -397,7 +385,7 @@ GameObject:
   - component: {fileID: 11902564062918816}
   - component: {fileID: 855681247002156933}
   - component: {fileID: 5923480381472029467}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

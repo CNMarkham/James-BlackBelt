@@ -12,6 +12,7 @@ public class enemie : MonoBehaviour
     NavMeshAgent agent;
     public GameObject bullet;
     public GameObject barrel;
+    public float health;
     public float bulletSpeed;
     public bool shooting;
 
@@ -33,7 +34,7 @@ public class enemie : MonoBehaviour
         destination = Findplayer.transform.position;
         agent.destination = destination;
         //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
-    
+
         if (Vector3.Distance(transform.position, Findplayer.transform.position) < 10.0f)
         {
             if (shooting == false)
@@ -54,9 +55,14 @@ public class enemie : MonoBehaviour
         shooting = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-                                   
-    }
 
+
+    public virtual void hurtPlayer(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

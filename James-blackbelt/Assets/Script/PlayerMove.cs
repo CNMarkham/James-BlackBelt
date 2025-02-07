@@ -32,8 +32,8 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Gun2.SetActive(false);
-        Gun.SetActive(true);
+        Gun2.SetActive(true);
+        Gun.SetActive(false);
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;           
@@ -116,7 +116,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-        Debug.Log(heatcountdown);
+        //Debug.Log(heatcountdown);
         if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
         {
 
