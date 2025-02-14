@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-
+    public GameObject Hit;
 
     public GameObject Gun;
     public GameObject Gun2;
@@ -43,16 +43,20 @@ public class Shoot : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.red, range);
         if (Input.GetMouseButton(0) && Gun2.activeInHierarchy)
         {
-            if(Time.time - previousShot > firerate)
-            {
-              
-                if (Physics.Raycast(transform.position, CameraRotation.transform.forward, range, 8))
-                {
-                    Debug.Log("hit");
-                }
-                /*GameObject clone = Instantiate(bullet, barrel2.transform.position, Quaternion.identity);
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                clone.GetComponent<Rigidbody>().AddForce(barrel2.transform.forward * bulletSpeed, ForceMode.Impulse);*/
+            if (Time.time - previousShot > firerate)
+            {
+                LayerMask mask = LayerMask.GetMask("enemy");
+                if (Physics.Raycast(ray, out hit, range, mask))
+                {
+
+                    hit.collider.GetComponent<enemie>().hurtPlayer(15);
+                    GameObject partical = Instantiate(Hit, hit.point, transform.rotation);
+                    Destroy(partical,1);
+                    Debug.Log("dmg");
+                }
                 previousShot = Time.time;
             }
         }

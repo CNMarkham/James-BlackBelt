@@ -29,7 +29,10 @@ public class enemie : MonoBehaviour
 
     void Update()
     {
+      
         transform.LookAt(facePlayer);
+        Vector3 flattenedVector = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+        transform.forward = flattenedVector;
         //debugDistance.text = Vector3.Distance(transform.position, target.transform.position).ToString();
         destination = Findplayer.transform.position;
         agent.destination = destination;
