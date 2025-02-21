@@ -15,6 +15,16 @@ public class Health : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        Hslider.GetComponent<Slider>().value = health;
+        if (health >= 200)
+        {
+            health = 200;
+        }
+
+    }
+
     public virtual void hurtPlayer(float damage)
     {
         health -= damage;
@@ -22,9 +32,6 @@ public class Health : MonoBehaviour
         {
             SceneManager.LoadScene(sceneBuildIndex: 2);
         }
-
-        Hslider.GetComponent<Slider>().value = health;
-        
     }
 
   

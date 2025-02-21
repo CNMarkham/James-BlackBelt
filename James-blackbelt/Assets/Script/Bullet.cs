@@ -22,9 +22,9 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<enemie>() != null)
+        if (collision.gameObject.GetComponent<Health>() != null)
         {
-            collision.gameObject.GetComponent<enemie>().hurtPlayer(10);
+            collision.gameObject.GetComponent<Health>().hurtPlayer(10);
             Destroy(this.gameObject);
         }
 

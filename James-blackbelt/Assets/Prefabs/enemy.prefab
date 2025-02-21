@@ -162,11 +162,10 @@ GameObject:
   - component: {fileID: 6817014047228979450}
   - component: {fileID: 1700392872968524398}
   - component: {fileID: 1929543523358744454}
-  - component: {fileID: 6854758722245091669}
   - component: {fileID: 5108273546963748044}
   - component: {fileID: 4521996306787164778}
   m_Layer: 8
-  m_Name: npc
+  m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,20 +287,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6854758722245091669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771501632467125010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b884f037604b8c4a9980b22d7d87a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  Hslider: {fileID: 0}
 --- !u!114 &5108273546963748044
 MonoBehaviour:
   m_ObjectHideFlags: 0

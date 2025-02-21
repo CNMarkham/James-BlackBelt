@@ -130,11 +130,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18376bc44cbbdab48bbb42bfb88ff5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hit: {fileID: 0}
   Gun: {fileID: 0}
   Gun2: {fileID: 0}
   bullet: {fileID: 1068659263675339146, guid: 6e4b72b52b556e64896a480439a19f5d, type: 3}
   barrel: {fileID: 6411693489143192404}
   barrel2: {fileID: 0}
+  CameraRotation: {fileID: 0}
+  range: 100
   bulletSpeed: 50
 --- !u!1 &1130175952880969850
 GameObject:
@@ -579,11 +582,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18376bc44cbbdab48bbb42bfb88ff5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hit: {fileID: 0}
   Gun: {fileID: 0}
   Gun2: {fileID: 0}
   bullet: {fileID: 1068659263675339146, guid: 6e4b72b52b556e64896a480439a19f5d, type: 3}
   barrel: {fileID: 1130175952880969850}
   barrel2: {fileID: 0}
+  CameraRotation: {fileID: 0}
+  range: 100
   bulletSpeed: 50
 --- !u!1 &7163222060568927853
 GameObject:
@@ -894,8 +900,8 @@ MonoBehaviour:
   RotationSpeed: 2116
   Speed: 1000
   move: {x: 0, y: 0, z: 0}
-  Gun: {fileID: 0}
-  Gun2: {fileID: 0}
+  Gun: {fileID: 6917143613485780554}
+  Gun2: {fileID: 340625664223357722}
   pov: {fileID: 7163222060568927853}
   heatsliderObject: {fileID: 0}
   healthsliderObject: {fileID: 0}

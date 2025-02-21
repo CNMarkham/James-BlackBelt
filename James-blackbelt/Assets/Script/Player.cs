@@ -46,6 +46,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
 
+
+        if(Input.GetKeyDown("4"))
+        {
+            Debug.Log("hi");
+            GetComponent<Health>().health += 10;
+
+        }
+
+
         if (Input.GetKeyDown("1"))
         {
             Gun.SetActive(false);
