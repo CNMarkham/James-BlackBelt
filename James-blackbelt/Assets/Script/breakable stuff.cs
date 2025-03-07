@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class breakablebox : MonoBehaviour
+public class breakablebox : MonoBehaviour, IDamageable
 {
     // Start is called before the first frame update
     void Start()
@@ -21,5 +21,9 @@ public class breakablebox : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+    public void Damage(float damage)
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -18,9 +18,9 @@ public class PlayerMove : MonoBehaviour
     public float RotationSpeed = 15f;
     public float Speed = 5f;
     public Vector3 move;
-    public GameObject Gun;
     public GameObject Gun2;
     public GameObject pov;
+    public GameObject PickUpText;
     public Slider heatsliderObject;
     public Slider healthsliderObject;
     private TMP_Text debugHeat;
@@ -33,7 +33,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         Gun2.SetActive(true);
-        Gun.SetActive(false);
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
         Cursor.lockState = CursorLockMode.Locked;           
@@ -46,25 +45,10 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
 
-
         if(Input.GetKeyDown("4"))
         {
             Debug.Log("hi");
             GetComponent<Health>().health += 10;
-
-        }
-
-
-        if (Input.GetKeyDown("1"))
-        {
-            Gun.SetActive(false);
-            Gun2.SetActive(true);
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            Gun2.SetActive(false);
-            Gun.SetActive(true);
 
         }
 
@@ -120,11 +104,6 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-
-
-
-
-
         //Debug.Log(heatcountdown);
         if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
         {
@@ -156,6 +135,20 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.GetComponent<Health>().hurtPlayer(10);
             Damage -= 10 * Time.deltaTime;
             healthsliderObject.value = Damage;
+        }
+    }
+    private void OnTriggerEnter(Collider collided)
+    {
+        if (collided.gameObject.name == "med Cube")
+        {
+            PickUpText.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider collided)
+    {
+        if (collided.gameObject.name == "med Cube")
+        {
+            PickUpText.SetActive(false);
         }
     }
 

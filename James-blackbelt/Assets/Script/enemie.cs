@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
 
-public class enemie : MonoBehaviour
+public class enemie : MonoBehaviour, IDamageable
 {
     private TMP_Text debugDistance;
     public GameObject Findplayer;
@@ -58,9 +58,7 @@ public class enemie : MonoBehaviour
         shooting = false;
     }
 
-
-
-    public virtual void hurtPlayer(float damage)
+    public void Damage(float damage)
     {
         health -= damage;
         if (health <= 0)
