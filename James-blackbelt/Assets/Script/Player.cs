@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody rb;
 
+    public float stims;
+    public float grenades;
     public float jetpackForce = 2;
     public float jumpForce = 15f;
     public float MaxHeatAmount = 10;
@@ -20,7 +22,6 @@ public class PlayerMove : MonoBehaviour
     public Vector3 move;
     public GameObject Gun2;
     public GameObject pov;
-    public GameObject PickUpText;
     public Slider heatsliderObject;
     public Slider healthsliderObject;
     private TMP_Text debugHeat;
@@ -45,11 +46,47 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKeyDown("4"))
-        {
-            Debug.Log("hi");
-            GetComponent<Health>().health += 10;
+  
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            pov.GetComponent<Camera>().fieldOfView = 40;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            pov.GetComponent<Camera>().fieldOfView = 60;
+        }
+
+        if (Input.GetKeyDown("c"))
+        {
+            gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+        }
+
+        if (Input.GetKeyUp("c"))
+        {
+            gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        if (Input.GetKeyDown("z"))
+        {
+            gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+
+        if (Input.GetKeyUp("z"))
+        {
+            gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        /*if(Input.GetKeyDown("g") && grenades >= 4)
+        {
+
+        }*/
+
+        if (Input.GetKeyDown("4") && stims >= 1)
+        {
+            GetComponent<Health>().health += 10;
+            stims -= 1;
         }
 
         string jetpackNum = string.Format("{0:0.00}", heatcountdown);
@@ -58,25 +95,71 @@ public class PlayerMove : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
-        move = (pov.transform.forward * Speed  * vertical * Time.deltaTime) + (pov.transform.right * Speed  * horizontal * Time.deltaTime);
-        rb.AddForce(move, ForceMode.Acceleration);
+
 
         Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
         rot.x = ClampAngle(rot.x, -60f, 60f);
 
         pov.transform.eulerAngles = rot;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f, ground);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
 
         if (jetpackToggle == false)
         {
-            if (Input.GetButtonDown("Jump") && isGrounded)
+            if (Input.GetButtonDown("Jump") && isGrounded && rb.velocity.y == 0)
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+
+            /*if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey("w"))
+            {
+                transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed * 2.5f;
+            }
+            else if (Input.GetKey("w") && !Input.GetKey(KeyCode.LeftShift))
+            {
+                transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
+            }
+            else if (Input.GetKey("s"))
+            {
+                transform.position -= transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
+            }
+
+            if (Input.GetKey("a") && !Input.GetKey("d"))
+            {
+                transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
+            }
+            else if (Input.GetKey("d") && !Input.GetKey("a"))
+            {
+                transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
+            }*/
+
+            /*if(Input.GetKeyDown("w"))
+            {
+                gameObject.transform.position.
+            }
+
+            if (Input.GetKeyDown("a"))
+            {
+
+            }
+
+            if (Input.GetKeyDown("s"))
+            {
+
+            }
+
+            if (Input.GetKeyDown("d"))
+            {
+
+            }*/
         }
         else
         {
+
+            move = (pov.transform.forward * Speed * vertical * Time.deltaTime) + (pov.transform.right * Speed * horizontal * Time.deltaTime);
+            move = new Vector3(move.x, 0, move.z);
+            rb.AddForce(move, ForceMode.Acceleration);
+
             if (Input.GetButton("Jump") && heatcountdown > 0)
             {
                 rb.AddForce(Vector3.up * jetpackForce, ForceMode.Acceleration);
@@ -86,7 +169,6 @@ public class PlayerMove : MonoBehaviour
                 heatcountdown = Mathf.Clamp(heatcountdown, 0,10);
                 heatsliderObject.value = heatcountdown;
                 heatGain = false;
-
             }
 
 
@@ -139,16 +221,9 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collided)
     {
-        if (collided.gameObject.name == "med Cube")
+        if (collided.gameObject.name == "trigger box")
         {
-            PickUpText.SetActive(true);
-        }
-    }
-    private void OnTriggerExit(Collider collided)
-    {
-        if (collided.gameObject.name == "med Cube")
-        {
-            PickUpText.SetActive(false);
+            stims = 4;
         }
     }
 
