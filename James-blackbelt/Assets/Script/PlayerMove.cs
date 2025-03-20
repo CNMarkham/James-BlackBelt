@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 15f;
     public float MaxHeatAmount = 10;
     public float heatcountdown;
-    public float movementSpeed = 10;
+    public float movementSpeed = 1;
     public bool jetpackToggle;
     public bool isGrounded;
     public float RotationSpeed = 15f;
@@ -98,14 +98,23 @@ public class PlayerMove : MonoBehaviour
         Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
 
 
-        Vector3 rot = transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
+        Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
         rot.x = ClampAngle(rot.x, -60f, 60f);
+        
+        //rotate camera only
+        pov.transform.eulerAngles = rot;
 
-        transform.eulerAngles = rot;
+
+        Vector3 rot2 = rot;
+        rot2.x = 0;
+        rot2.z = 0;
+        transform.eulerAngles = rot2;
+        // transform.forward = pov.transform.forward;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
+        pov.transform.position = transform.position;
 
-        if (jetpackToggle == false)
+        if (jetpackToggle == false )
         {
             if (Input.GetButtonDown("Jump") && isGrounded && rb.velocity.y == 0)
             {
@@ -117,19 +126,20 @@ public class PlayerMove : MonoBehaviour
                 transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
             }
 
-            if (Input.GetKeyDown("a"))
+            if (Input.GetKey("a"))
             {
+                transform.Translate(Vector3.left * Time.deltaTime * movementSpeed);
 
             }
 
-            if (Input.GetKeyDown("s"))
+            if (Input.GetKey("s"))
             {
-
+                transform.Translate(Vector3.back * Time.deltaTime * movementSpeed);
             }
 
-            if (Input.GetKeyDown("d"))
+            if (Input.GetKey("d"))
             {
-
+                transform.Translate(Vector3.right * Time.deltaTime * movementSpeed);
             }
         }
         else
