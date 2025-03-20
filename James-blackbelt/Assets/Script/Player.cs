@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 15f;
     public float MaxHeatAmount = 10;
     public float heatcountdown;
+    public float movementSpeed = 10;
     public bool jetpackToggle;
     public bool isGrounded;
     public float RotationSpeed = 15f;
@@ -97,10 +98,10 @@ public class PlayerMove : MonoBehaviour
         Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
 
 
-        Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
+        Vector3 rot = transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
         rot.x = ClampAngle(rot.x, -60f, 60f);
 
-        pov.transform.eulerAngles = rot;
+        transform.eulerAngles = rot;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
 
@@ -111,31 +112,9 @@ public class PlayerMove : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
 
-            /*if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey("w"))
+            if(Input.GetKey("w"))
             {
-                transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed * 2.5f;
-            }
-            else if (Input.GetKey("w") && !Input.GetKey(KeyCode.LeftShift))
-            {
-                transform.position += transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
-            }
-            else if (Input.GetKey("s"))
-            {
-                transform.position -= transform.TransformDirection(Vector3.forward) * Time.deltaTime * movementSpeed;
-            }
-
-            if (Input.GetKey("a") && !Input.GetKey("d"))
-            {
-                transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
-            }
-            else if (Input.GetKey("d") && !Input.GetKey("a"))
-            {
-                transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * movementSpeed;
-            }*/
-
-            /*if(Input.GetKeyDown("w"))
-            {
-                gameObject.transform.position.
+                transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
             }
 
             if (Input.GetKeyDown("a"))
@@ -151,7 +130,7 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKeyDown("d"))
             {
 
-            }*/
+            }
         }
         else
         {
