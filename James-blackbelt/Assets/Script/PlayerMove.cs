@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 
 public class PlayerMove : MonoBehaviour
 {
 
+    private TMP_Text debugHeat;
+
     private Rigidbody rb;
 
+    private float targetFOV;
+    private float targetScopeOpacity;
+
+    public float ScopeFov = 40;
+    public float DefaultFov = 60;
     public float stims;
     public float grenades;
     public float jetpackForce = 2;
@@ -16,18 +24,25 @@ public class PlayerMove : MonoBehaviour
     public float MaxHeatAmount = 10;
     public float heatcountdown;
     public float movementSpeed = 1;
+    public float RotationSpeed = 10f;   
+    public float Speed = 5f;
+    public float FOVChangeSpeed = 5;
+    public float ScopechangeSpeed = 10;  
+    public float Damage;
+
     public bool jetpackToggle;
     public bool isGrounded;
-    public float RotationSpeed = 15f;
-    public float Speed = 5f;
+    public bool heatGain;
+
     public Vector3 move;
+
     public GameObject Gun2;
     public GameObject pov;
+    public GameObject scope;
+
     public Slider heatsliderObject;
     public Slider healthsliderObject;
-    private TMP_Text debugHeat;
-    public float Damage;
-    public bool heatGain;
+   
 
 
     public LayerMask ground;
@@ -41,6 +56,9 @@ public class PlayerMove : MonoBehaviour
         heatcountdown = 10;
         heatsliderObject.value = heatcountdown;
         Damage = 10;
+        targetFOV = 60;
+        targetScopeOpacity = 0;
+        Gun2.transform.localScale = new Vector3(1, 1, 1);
     }
     
     // Update is called once per frame
@@ -51,12 +69,16 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            pov.GetComponent<Camera>().fieldOfView = 40;
+            targetScopeOpacity = 1;
+            targetFOV = ScopeFov;
+            Gun2.transform.localScale = new Vector3(0, 0, 0);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            pov.GetComponent<Camera>().fieldOfView = 60;
+            targetScopeOpacity = 0;
+            targetFOV = DefaultFov; 
+            Gun2.transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (Input.GetKeyDown("c"))
@@ -190,6 +212,12 @@ public class PlayerMove : MonoBehaviour
                 jetpackToggle = true;
             }
         }
+
+        pov.GetComponent<Camera>().fieldOfView = Mathf.Lerp(pov.GetComponent<Camera>().fieldOfView, targetFOV, Time.deltaTime * FOVChangeSpeed);
+        Color ScopeColour = scope.GetComponent<Image>().color;
+        ScopeColour.a = Mathf.Lerp(ScopeColour.a, targetScopeOpacity, Time.deltaTime * ScopechangeSpeed);
+
+        scope.GetComponent<Image>().color = ScopeColour;
     }
     float ClampAngle(float angle, float from, float to)
     {
