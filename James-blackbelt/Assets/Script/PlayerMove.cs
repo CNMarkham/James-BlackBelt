@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     public Vector3 move;
 
     public GameObject Gun2;
+    public GameObject PlayerModel;
     public GameObject pov;
     public GameObject scope;
 
@@ -72,6 +73,7 @@ public class PlayerMove : MonoBehaviour
             targetScopeOpacity = 1;
             targetFOV = ScopeFov;
             Gun2.transform.localScale = new Vector3(0, 0, 0);
+            PlayerModel.transform.localScale = new Vector3(0, 0, 0);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -79,6 +81,7 @@ public class PlayerMove : MonoBehaviour
             targetScopeOpacity = 0;
             targetFOV = DefaultFov; 
             Gun2.transform.localScale = new Vector3(1, 1, 1);
+            PlayerModel.transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (Input.GetKeyDown("c"))
@@ -101,10 +104,7 @@ public class PlayerMove : MonoBehaviour
             gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        /*if(Input.GetKeyDown("g") && grenades >= 4)
-        {
 
-        }*/
 
         if (Input.GetKeyDown("4") && stims >= 1)
         {
