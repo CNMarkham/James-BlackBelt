@@ -23,12 +23,12 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 15f;
     public float MaxHeatAmount = 10;
     public float heatcountdown;
-    public float movementSpeed = 1;
+    public float movementSpeed = 0.25f;
     public float RotationSpeed = 10f;   
     public float Speed = 5f;
     public float FOVChangeSpeed = 5;
     public float ScopechangeSpeed = 10;  
-    public float Damage;
+    public float Damage;    
 
     public bool jetpackToggle;
     public bool isGrounded;
@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isGrounded = true;
         Gun2.SetActive(true);
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
