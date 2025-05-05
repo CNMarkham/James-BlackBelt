@@ -18,12 +18,12 @@ public class PlayerMove : MonoBehaviour
     public float ScopeFov = 40;
     public float DefaultFov = 60;
     public float stims;
-    public float grenades;
     public float jetpackForce = 2;
     public float jumpForce = 15f;
     public float MaxHeatAmount = 10;
     public float heatcountdown;
-    public float movementSpeed = 0.25f;
+    public float MovementSpeed = 0.25f;
+    public float SideMovementSpeed = 0.15f;
     public float RotationSpeed = 10f;   
     public float Speed = 5f;
     public float FOVChangeSpeed = 5;
@@ -54,7 +54,8 @@ public class PlayerMove : MonoBehaviour
         Gun2.SetActive(true);
         rb = GetComponent<Rigidbody>();
         debugHeat = GameObject.Find("debugHeat").GetComponent<TMP_Text>();
-        Cursor.lockState = CursorLockMode.Locked;           
+        Cursor.lockState = CursorLockMode.Locked;
+
         heatcountdown = 10;
         heatsliderObject.value = heatcountdown;
         Damage = 10;
@@ -146,23 +147,23 @@ public class PlayerMove : MonoBehaviour
 
             if(Input.GetKey("w"))
             {
-                transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
+                transform.Translate(Vector3.forward * Time.deltaTime * MovementSpeed);
             }
 
             if (Input.GetKey("a"))
             {
-                transform.Translate(Vector3.left * Time.deltaTime * movementSpeed);
+                transform.Translate(Vector3.left * Time.deltaTime * SideMovementSpeed);
 
             }
 
             if (Input.GetKey("s"))
             {
-                transform.Translate(Vector3.back * Time.deltaTime * movementSpeed);
+                transform.Translate(Vector3.back * Time.deltaTime * MovementSpeed);
             }
 
             if (Input.GetKey("d"))
             {
-                transform.Translate(Vector3.right * Time.deltaTime * movementSpeed);
+                transform.Translate(Vector3.right * Time.deltaTime * SideMovementSpeed);
             }
         }
         else
