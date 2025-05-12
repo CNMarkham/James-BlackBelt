@@ -502,6 +502,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4405681490799800702, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.58409
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405681490799800702, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2749148
+      objectReference: {fileID: 0}
     - target: {fileID: 5737781146010750045, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -541,6 +549,14 @@ PrefabInstance:
     - target: {fileID: 5737781146010750045, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852371788657691391, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.58409
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852371788657691391, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2749148
       objectReference: {fileID: 0}
     - target: {fileID: 7944430292512306584, guid: 1e476577684d7724692d80dc7ae71e03, type: 3}
       propertyPath: heatsliderObject
