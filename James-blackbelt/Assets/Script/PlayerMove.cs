@@ -73,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             targetScopeOpacity = 1;
-            targetFOV = ScopeFov;
+            targetFOV = ScopeFov    ;
             Gun2.transform.localScale = new Vector3(0, 0, 0);
             PlayerModel.transform.localScale = new Vector3(0, 0, 0);
         }
