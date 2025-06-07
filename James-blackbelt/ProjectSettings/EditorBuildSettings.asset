@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lose.unity
     guid: 5e2ca3914a2e71748b2290df153f6b57
+  - enabled: 1
+    path: Assets/Scenes/Bunker.unity
+    guid: 274d22b4434bfa6429185d59bc1afff4
   m_configObjects: {}

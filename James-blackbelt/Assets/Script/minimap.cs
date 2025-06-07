@@ -8,8 +8,6 @@ public class minimap : MonoBehaviour
     public Transform player;
   void LateUpdate()
     {
-        Vector3 newPostiton = player.position;
-        newPostiton.y = transform.position.y;
-        transform.position = newPostiton;
+        transform.position = player.position + new Vector3(0,100,0);
     }
 }
