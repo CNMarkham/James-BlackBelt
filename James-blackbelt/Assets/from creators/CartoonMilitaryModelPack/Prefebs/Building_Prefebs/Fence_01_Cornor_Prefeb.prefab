@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3322184}
   - component: {fileID: 2365454}
   - component: {fileID: 9541430}
-  - component: {fileID: 5526863346173520363}
+  - component: {fileID: 2525269166536059201}
   m_Layer: 0
   m_Name: Fence_01_Cornor
   m_TagString: Untagged
@@ -138,7 +138,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!64 &5526863346173520363
+--- !u!64 &2525269166536059201
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
