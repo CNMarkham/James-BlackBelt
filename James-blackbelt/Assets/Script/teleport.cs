@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class BunkerEnters : MonoBehaviour
 {
+    public GameObject player;
+    public GameObject gun;
+    public Transform target;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +20,12 @@ public class BunkerEnters : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collided)
     {
-        if (collision.gameObject.GetComponent<PlayerMove>() != null)
+        if (collided.gameObject.GetComponent<PlayerMove>() != null)
         {
-            //gameObject.
+             player.transform.position = target.position;
+             gun.transform.position = target.position;
         }
     }
 
