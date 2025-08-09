@@ -33,10 +33,6 @@ public class enemie : MonoBehaviour, IDamageable
         transform.LookAt(facePlayer);
         Vector3 flattenedVector = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
         transform.forward = flattenedVector;
-        //debugDistance.text = Vector3.Distance(transform.position, target.transform.position).ToString();
-        destination = Findplayer.transform.position;
-        agent.destination = destination;
-        //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
 
         if (Vector3.Distance(transform.position, Findplayer.transform.position) < 10.0f)
         {

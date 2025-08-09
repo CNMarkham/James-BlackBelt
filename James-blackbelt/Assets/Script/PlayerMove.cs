@@ -63,17 +63,14 @@ public class PlayerMove : MonoBehaviour
         targetScopeOpacity = 0;
         Gun2.transform.localScale = new Vector3(1, 1, 1);
     }
-    
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-  
-
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             targetScopeOpacity = 1;
-            targetFOV = ScopeFov    ;
+            targetFOV = ScopeFov;
             Gun2.transform.localScale = new Vector3(0, 0, 0);
             PlayerModel.transform.localScale = new Vector3(0, 0, 0);
         }
@@ -81,7 +78,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             targetScopeOpacity = 0;
-            targetFOV = DefaultFov; 
+            targetFOV = DefaultFov;
             Gun2.transform.localScale = new Vector3(1, 1, 1);
             PlayerModel.transform.localScale = new Vector3(1, 1, 1);
         }
@@ -114,6 +111,17 @@ public class PlayerMove : MonoBehaviour
             stims -= 1;
         }
 
+        if (jetpackToggle == false)
+        {
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+
+        }
+    }
+    void FixedUpdate()
+    {
         string jetpackNum = string.Format("{0:0.00}", heatcountdown);
         debugHeat.text = $"The Current heat is " + jetpackNum;
 
@@ -138,40 +146,14 @@ public class PlayerMove : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
         pov.transform.position = transform.position;
 
-        if (jetpackToggle == false )
-        {
-            if (Input.GetButtonDown("Jump") && isGrounded && rb.velocity.y == 0)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-
-            if(Input.GetKey("w"))
-            {
-                transform.Translate(Vector3.forward * Time.deltaTime * MovementSpeed);
-            }
-
-            if (Input.GetKey("a"))
-            {
-                transform.Translate(Vector3.left * Time.deltaTime * SideMovementSpeed);
-
-            }
-
-            if (Input.GetKey("s"))
-            {
-                transform.Translate(Vector3.back * Time.deltaTime * MovementSpeed);
-            }
-
-            if (Input.GetKey("d"))
-            {
-                transform.Translate(Vector3.right * Time.deltaTime * SideMovementSpeed);
-            }
-        }
-        else
+       
+        if (jetpackToggle == true )
         {
 
-            move = (pov.transform.forward * Speed * vertical * Time.deltaTime) + (pov.transform.right * Speed * horizontal * Time.deltaTime);
+            move = (pov.transform.forward * Speed * vertical) + (pov.transform.right * Speed * horizontal);
             move = new Vector3(move.x, 0, move.z);
             rb.AddForce(move, ForceMode.Acceleration);
+           
 
             if (Input.GetButton("Jump") && heatcountdown > 0)
             {
@@ -197,6 +179,11 @@ public class PlayerMove : MonoBehaviour
                 heatsliderObject.value = heatcountdown;
             }
 
+        }else
+        {
+            move = (pov.transform.forward * MovementSpeed* vertical) + (pov.transform.right * SideMovementSpeed * horizontal);
+            move = new Vector3(move.x, 0, move.z);
+            rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
         }
 
         //Debug.Log(heatcountdown);
