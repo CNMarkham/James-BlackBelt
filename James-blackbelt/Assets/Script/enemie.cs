@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.UI;
 
 public class enemie : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,7 @@ public class enemie : MonoBehaviour, IDamageable
     NavMeshAgent agent;
     public GameObject bullet;
     public GameObject barrel;
+    public GameObject enemy;
     public float health;
     public float bulletSpeed;
     public bool shooting;
@@ -23,14 +25,10 @@ public class enemie : MonoBehaviour, IDamageable
         agent = GetComponent<NavMeshAgent>();
         Findplayer = GameObject.Find("Player");
         facePlayer = GameObject.Find("Player").transform;
-        // destination = agent.destination;
-        //debugDistance = GameObject.Find("DistanceDebugText").GetComponent<TMP_Text>();
     }
 
     void Update()
     {
-      
-        transform.LookAt(facePlayer);
         Vector3 flattenedVector = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
         transform.forward = flattenedVector;
 
@@ -44,7 +42,15 @@ public class enemie : MonoBehaviour, IDamageable
         }
     }
 
-    IEnumerator ShootProjectile(float reloadTime)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            transform.LookAt(facePlayer);
+        }
+    }
+
+        IEnumerator ShootProjectile(float reloadTime)
     {
         shooting = true;
         yield return new WaitForSeconds(reloadTime);

@@ -123,7 +123,6 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         string jetpackNum = string.Format("{0:0.00}", heatcountdown);
-        debugHeat.text = $"The Current heat is " + jetpackNum;
 
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
@@ -141,13 +140,12 @@ public class PlayerMove : MonoBehaviour
         rot2.x = 0;
         rot2.z = 0;
         transform.eulerAngles = rot2;
-        // transform.forward = pov.transform.forward;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
         pov.transform.position = transform.position;
 
        
-        if (jetpackToggle == true )
+        if (jetpackToggle == true)
         {
 
             move = (pov.transform.forward * Speed * vertical) + (pov.transform.right * Speed * horizontal);
