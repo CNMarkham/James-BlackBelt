@@ -119,6 +119,21 @@ public class PlayerMove : MonoBehaviour
             }
 
         }
+        if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
+        {
+
+            jetpackToggle = !jetpackToggle;
+            //if (jetpackToggle == true)
+            //{
+
+            //    jetpackToggle = false;
+            //}
+            //else
+            //{
+
+            //    jetpackToggle = true;
+            //}
+        }
     }
     void FixedUpdate()
     {
@@ -185,20 +200,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //Debug.Log(heatcountdown);
-        if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
-        {
-
-            if (jetpackToggle == true)
-            {
-
-                jetpackToggle = false;
-            }
-            else
-            {
-
-                jetpackToggle = true;
-            }
-        }
+     
 
         pov.GetComponent<Camera>().fieldOfView = Mathf.Lerp(pov.GetComponent<Camera>().fieldOfView, targetFOV, Time.deltaTime * FOVChangeSpeed);
         Color ScopeColour = scope.GetComponent<Image>().color;

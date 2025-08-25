@@ -7,21 +7,24 @@ using UnityEngine.UI;
 
 public class enemie : MonoBehaviour, IDamageable
 {
-    private TMP_Text debugDistance;
     public GameObject Findplayer;
-    Vector3 destination;
-    NavMeshAgent agent;
     public GameObject bullet;
     public GameObject barrel;
     public GameObject enemy;
+    public GameObject insurgent;
+    public Transform facePlayer;
+    public Transform defaultSetup;
+    private TMP_Text debugDistance;
     public float health;
     public float bulletSpeed;
     public bool shooting;
-
-    public Transform facePlayer;
+    public bool PlayerFound;
+    Vector3 destination;
+    NavMeshAgent agent;
 
     void Start()
     {
+        defaultSetup = transform;
         agent = GetComponent<NavMeshAgent>();
         Findplayer = GameObject.Find("Player");
         facePlayer = GameObject.Find("Player").transform;
@@ -32,31 +35,49 @@ public class enemie : MonoBehaviour, IDamageable
         Vector3 flattenedVector = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
         transform.forward = flattenedVector;
 
-        if (Vector3.Distance(transform.position, Findplayer.transform.position) < 10.0f)
+        if (Vector3.Distance(transform.position, Findplayer.transform.position) < 100.0f && PlayerFound == true)
         {
             if (shooting == false)
             {
-                StartCoroutine(ShootProjectile(1));
+                StartCoroutine(ShootProjectile(0.5f));
             }
 
         }
+
+        if (PlayerFound == true)
+        {
+            insurgent.transform.LookAt(facePlayer);
+        }
+        else if(!PlayerFound)
+        {
+            insurgent.transform.rotation = defaultSetup.rotation;
+        }
+
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            transform.LookAt(facePlayer);
+            PlayerFound = true;
         }
     }
 
-        IEnumerator ShootProjectile(float reloadTime)
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerFound = false;
+        }
+    }
+
+    IEnumerator ShootProjectile(float reloadTime)
     {
         shooting = true;
         yield return new WaitForSeconds(reloadTime);
         GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
         clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
-        yield return new WaitForSeconds(reloadTime);
         shooting = false;
     }
 
