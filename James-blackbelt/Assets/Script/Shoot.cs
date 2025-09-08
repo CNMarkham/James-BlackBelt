@@ -41,7 +41,7 @@ public class Shoot : MonoBehaviour
                     GameObject partical = Instantiate(Hit, hit.point, transform.rotation);
                     Destroy(partical,1);
 
-                    IDamageable HitObj = hit.collider.GetComponent<MonoBehaviour>() as IDamageable;
+                    IDamageable HitObj = hit.collider.GetComponent<IDamageable>();
                     if (HitObj != null)
                     {
                         HitObj.Damage(15);

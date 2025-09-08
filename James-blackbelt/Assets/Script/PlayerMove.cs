@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -37,7 +36,6 @@ public class PlayerMove : MonoBehaviour
     public Vector3 move;
 
     public GameObject Gun2;
-    public GameObject PlayerModel;
     public GameObject pov;
     public GameObject scope;
 
@@ -72,15 +70,13 @@ public class PlayerMove : MonoBehaviour
             targetScopeOpacity = 1;
             targetFOV = ScopeFov;
             Gun2.transform.localScale = new Vector3(0, 0, 0);
-            PlayerModel.transform.localScale = new Vector3(0, 0, 0);
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             targetScopeOpacity = 0;
             targetFOV = DefaultFov;
-            Gun2.transform.localScale = new Vector3(1, 1, 1);
-            PlayerModel.transform.localScale = new Vector3(1, 1, 1);
+            Gun2.transform.localScale = new Vector3(1, 1, 1);   
         }
 
         if (Input.GetKeyDown("c"))
@@ -122,18 +118,22 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V) && heatcountdown > 0)
         {
 
-            jetpackToggle = !jetpackToggle;
-            //if (jetpackToggle == true)
-            //{
+           // jetpackToggle = !jetpackToggle;
+            if (jetpackToggle == true)
+            {
 
-            //    jetpackToggle = false;
-            //}
-            //else
-            //{
+                jetpackToggle = false;
+            }
+            else
+            {
 
-            //    jetpackToggle = true;
-            //}
+                jetpackToggle = true;
+            }
         }
+        Vector3 rot = pov.transform.eulerAngles += new Vector3(Input.GetAxis("Mouse Y") * -RotationSpeed, Input.GetAxis("Mouse X") * RotationSpeed, 0);
+        rot.x = ClampAngle(rot.x, -60f, 60f);
+        //rotate camera only
+        pov.transform.eulerAngles = rot;
     }
     void FixedUpdate()
     {
@@ -141,20 +141,8 @@ public class PlayerMove : MonoBehaviour
 
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        Vector3 rotation = new Vector3(0, horizontal * Time.deltaTime, 0);
 
-
-        Vector3 rot = pov.transform.eulerAngles += new Vector3 (Input.GetAxis("Mouse Y") * Time.deltaTime *- RotationSpeed, Input.GetAxis("Mouse X") * Time.deltaTime * RotationSpeed, 0) ;
-        rot.x = ClampAngle(rot.x, -60f, 60f);
-        
-        //rotate camera only
-        pov.transform.eulerAngles = rot;
-
-
-        Vector3 rot2 = rot;
-        rot2.x = 0;
-        rot2.z = 0;
-        transform.eulerAngles = rot2;
+        //transform.eulerAngles = rot2;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
         pov.transform.position = transform.position;
