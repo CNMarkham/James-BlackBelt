@@ -9,6 +9,8 @@ public class Shoot : MonoBehaviour
     public GameObject bullet;
     public GameObject barrel;
     public GameObject CameraRotation;
+    public GameObject Flash;
+    public bool flash;
     public float range = 100;
     public float bulletSpeed;
 
@@ -19,7 +21,7 @@ public class Shoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        flash = Flash;
     }
 
     // Update is called once per frame
@@ -29,6 +31,16 @@ public class Shoot : MonoBehaviour
         if (Input.GetMouseButton(0) && Gun.activeInHierarchy)
         {
             RaycastHit hit;
+
+            if (flash == true)
+            {
+                flash = false;
+            }
+            else
+            {
+                flash = false;
+            }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Time.time - previousShot > firerate)
