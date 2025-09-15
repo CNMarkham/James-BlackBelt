@@ -12,6 +12,8 @@ public class enemie : MonoBehaviour, IDamageable
     public GameObject barrel;
     public GameObject enemy;
     public GameObject insurgent;
+    public GameObject point1;
+    public GameObject point2;
     public Transform facePlayer;
     public Transform defaultSetup;
     private TMP_Text debugDistance;
@@ -52,6 +54,7 @@ public class enemie : MonoBehaviour, IDamageable
         {
             insurgent.transform.rotation = defaultSetup.rotation;
         }
+
 
 
     }
