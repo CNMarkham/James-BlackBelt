@@ -18,6 +18,8 @@ public class Shoot : MonoBehaviour
     float firerate = 0.1f;
     private RaycastHit hit;
 
+    public Animator m_Animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class Shoot : MonoBehaviour
 
             if (Time.time - previousShot > firerate)
             {
+                m_Animator.SetTrigger("shoot");
                 //LayerMask mask = LayerMask.GetMask("enemy");
                 if (Physics.Raycast(ray, out hit, range))
                 {
@@ -60,7 +63,13 @@ public class Shoot : MonoBehaviour
                     }
                 }
                 previousShot = Time.time;
-            }
+            }  
+        }
+        
+        if (Input.GetButtonDown("r"))
+        {
+            m_Animator.SetTrigger("reload");
         }
     }
 }
+
