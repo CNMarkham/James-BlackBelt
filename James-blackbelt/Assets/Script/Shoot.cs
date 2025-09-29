@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+
+    public PlayerMove playerMove;
+
     public GameObject Hit;
     public GameObject Gun;
     public GameObject bullet;
@@ -13,6 +16,7 @@ public class Shoot : MonoBehaviour
     public bool flash;
     public float range = 100;
     public float bulletSpeed;
+    public float recoil;
 
     float previousShot = 0;
     float firerate = 0.1f;
@@ -47,6 +51,9 @@ public class Shoot : MonoBehaviour
 
             if (Time.time - previousShot > firerate)
             {
+                //to do recoil
+                playerMove.recoil = recoil;
+
                 m_Animator.SetTrigger("shoot");
                 //LayerMask mask = LayerMask.GetMask("enemy");
                 if (Physics.Raycast(ray, out hit, range))
@@ -64,6 +71,11 @@ public class Shoot : MonoBehaviour
                 }
                 previousShot = Time.time;
             }  
+        }
+        playerMove.recoil -= Time.deltaTime*2;
+        if (playerMove.recoil < 0)
+        {
+            playerMove.recoil = 0;
         }
         
         if (Input.GetButtonDown("r"))

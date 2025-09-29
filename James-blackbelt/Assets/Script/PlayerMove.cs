@@ -27,7 +27,8 @@ public class PlayerMove : MonoBehaviour
     public float Speed = 5f;
     public float FOVChangeSpeed = 5;
     public float ScopechangeSpeed = 10;  
-    public float Damage;    
+    public float Damage;
+    public float recoil;
 
     public bool jetpackToggle;
     public bool isGrounded;
@@ -131,7 +132,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
         Vector3 rot = pov.transform.eulerAngles += new Vector3(Input.GetAxis("Mouse Y") * -RotationSpeed, Input.GetAxis("Mouse X") * RotationSpeed, 0);
-        rot.x = ClampAngle(rot.x, -60f, 60f);
+        rot.x = ClampAngle(rot.x-recoil, -60f, 60f);
         //rotate camera only
         pov.transform.eulerAngles = rot;
     }
