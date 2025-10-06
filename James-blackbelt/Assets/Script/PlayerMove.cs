@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     public float ScopechangeSpeed = 10;  
     public float Damage;
     public float recoil;
+    public Vector3 camRotation;
 
     public bool jetpackToggle;
     public bool isGrounded;
@@ -131,10 +132,10 @@ public class PlayerMove : MonoBehaviour
                 jetpackToggle = true;
             }
         }
-        Vector3 rot = pov.transform.eulerAngles += new Vector3(Input.GetAxis("Mouse Y") * -RotationSpeed, Input.GetAxis("Mouse X") * RotationSpeed, 0);
-        rot.x = ClampAngle(rot.x-recoil, -60f, 60f);
+        camRotation += new Vector3(Input.GetAxis("Mouse Y") * -RotationSpeed, Input.GetAxis("Mouse X") * RotationSpeed, 0);
+        camRotation.x = ClampAngle(camRotation.x, -90f, 90f);
         //rotate camera only
-        pov.transform.eulerAngles = rot;
+        pov.transform.eulerAngles = camRotation - new Vector3(recoil, 0, 0);
     }
     void FixedUpdate()
     {
@@ -144,7 +145,7 @@ public class PlayerMove : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         //transform.eulerAngles = rot2;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 3f, ground);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.5f, ground);
         Debug.DrawRay(transform.position, Vector3.down * .15f, Color.red);
         pov.transform.position = transform.position;
 

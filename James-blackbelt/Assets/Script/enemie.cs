@@ -80,7 +80,7 @@ public class enemie : MonoBehaviour, IDamageable
         shooting = true;
         yield return new WaitForSeconds(reloadTime);
         GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
-        clone.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+        clone.GetComponent<Rigidbody>().AddForce(insurgent.transform.forward * bulletSpeed, ForceMode.Impulse);
         shooting = false;
     }
 

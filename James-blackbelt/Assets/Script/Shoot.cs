@@ -72,13 +72,13 @@ public class Shoot : MonoBehaviour
                 previousShot = Time.time;
             }  
         }
-        playerMove.recoil -= Time.deltaTime*2;
+        playerMove.recoil -= Time.deltaTime*5;
         if (playerMove.recoil < 0)
         {
             playerMove.recoil = 0;
         }
         
-        if (Input.GetButtonDown("r"))
+        if (Input.GetKeyDown("r"))
         {
             m_Animator.SetTrigger("reload");
         }
