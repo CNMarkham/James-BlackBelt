@@ -52,6 +52,7 @@ public class enemie : MonoBehaviour, IDamageable
         }
         else if(!PlayerFound)
         {
+            
             insurgent.transform.rotation = defaultSetup.rotation;
         }
 
