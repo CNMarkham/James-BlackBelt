@@ -13,10 +13,17 @@ public class Shoot : MonoBehaviour
     public GameObject barrel;
     public GameObject CameraRotation;
     public GameObject Flash;
+
     public bool flash;
+    public bool canShoot;
+
     public float range = 100;
     public float bulletSpeed;
     public float recoil;
+    public float reloadTime = 1.5f;
+    public float reloadTimer;
+
+    public int bullets;
 
     float previousShot = 0;
     float firerate = 0.1f;
@@ -28,38 +35,49 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         flash = Flash;
+        bullets = 30;
+        canShoot = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.red, range);
-        if (Input.GetMouseButton(0) && Gun.activeInHierarchy)
+        if(canShoot == false)
         {
-            RaycastHit hit;
+            reloadTimer -= Time.deltaTime;
 
-            if (flash == true)
+
+            if (reloadTimer <= 0)
             {
-                flash = false;
+                bullets = 30;
+                canShoot = true;
             }
-            else
-            {
-                flash = false;
-            }
+        }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        Debug.DrawRay(transform.position, transform.forward, Color.red, range);
+        if (Input.GetMouseButton(0) && Gun.activeInHierarchy && bullets > 0)
+        {
             if (Time.time - previousShot > firerate)
             {
                 //to do recoil
                 playerMove.recoil = recoil;
+                bullets -= 1; print(bullets);
+
+                if (flash == true)
+                {
+                    flash = false;
+                }
+                else
+                {
+                    flash = false;
+                }
 
                 m_Animator.SetTrigger("shoot");
-                //LayerMask mask = LayerMask.GetMask("enemy");
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, range))
                 {
-
-                    /*hit.collider.GetComponent<enemie>().hurtPlayer(15);*/
                     GameObject partical = Instantiate(Hit, hit.point, transform.rotation);
                     Destroy(partical,1);
 
@@ -72,6 +90,7 @@ public class Shoot : MonoBehaviour
                 previousShot = Time.time;
             }  
         }
+
         playerMove.recoil -= Time.deltaTime*5;
         if (playerMove.recoil < 0)
         {
@@ -81,7 +100,9 @@ public class Shoot : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             m_Animator.SetTrigger("reload");
+            canShoot = false;
+            reloadTimer = reloadTime;
         }
     }
-}
+}   
 
