@@ -24,7 +24,7 @@ public class BunkerEnters : MonoBehaviour
     {
         if (collided.gameObject.GetComponent<PlayerMove>() != null)
         {
-             player.transform.position = target.position;
+             player.transform.position = target.position;   
              gun.transform.position = target.position;
         }
     }

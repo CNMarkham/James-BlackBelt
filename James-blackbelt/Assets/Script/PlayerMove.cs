@@ -133,9 +133,10 @@ public class PlayerMove : MonoBehaviour
             }
         }
         camRotation += new Vector3(Input.GetAxis("Mouse Y") * -RotationSpeed, Input.GetAxis("Mouse X") * RotationSpeed, 0);
-        camRotation.x = ClampAngle(camRotation.x, -90f, 90f);
+        camRotation.x = Mathf.Clamp(camRotation.x, -90f, 90f);
         //rotate camera only
         pov.transform.eulerAngles = camRotation - new Vector3(recoil, 0, 0);
+        transform.eulerAngles = new Vector3(0, camRotation.y, 0);
     }
     void FixedUpdate()
     {
@@ -153,7 +154,7 @@ public class PlayerMove : MonoBehaviour
         if (jetpackToggle == true)
         {
 
-            move = (pov.transform.forward * Speed * vertical) + (pov.transform.right * Speed * horizontal);
+            move = (transform.forward * Speed * vertical) + (transform.right * Speed * horizontal);
             move = new Vector3(move.x, 0, move.z);
             rb.AddForce(move, ForceMode.Acceleration);
            
@@ -184,7 +185,7 @@ public class PlayerMove : MonoBehaviour
 
         }else
         {
-            move = (pov.transform.forward * MovementSpeed* vertical) + (pov.transform.right * SideMovementSpeed * horizontal);
+            move = (transform.forward * MovementSpeed* vertical) + (transform.right * SideMovementSpeed * horizontal);
             move = new Vector3(move.x, 0, move.z);
             rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
         }
@@ -198,13 +199,7 @@ public class PlayerMove : MonoBehaviour
 
         scope.GetComponent<Image>().color = ScopeColour;
     }
-    float ClampAngle(float angle, float from, float to)
-    {
-        // accepts e.g. -80, 80
-        if (angle < 0f) angle = 360 + angle;
-        if (angle > 180f) return Mathf.Max(angle, 360 + from);
-        return Mathf.Min(angle, to);
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
