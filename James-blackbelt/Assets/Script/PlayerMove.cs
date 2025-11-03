@@ -50,6 +50,8 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RotationSpeed = PlayerPrefs.GetFloat("Sensitivity", 10f);
+
         isGrounded = true;
         Gun2.SetActive(true);
         rb = GetComponent<Rigidbody>();
@@ -66,7 +68,12 @@ public class PlayerMove : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
+ 
     {
+        
+
+
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             targetScopeOpacity = 1;
