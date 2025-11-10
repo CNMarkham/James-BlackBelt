@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
     public PlayerMove playerMove;
 
     public GameObject Hit;
+    public GameObject muzzleFlash;
     public GameObject Gun;
     public GameObject bullet;
     public GameObject barrel;
@@ -17,6 +18,7 @@ public class Shoot : MonoBehaviour
     public bool flash;
     public bool canShoot;
 
+    public float flashRotation;
     public float range = 100;
     public float bulletSpeed;
     public float recoil;
@@ -60,6 +62,10 @@ public class Shoot : MonoBehaviour
         {
             if (Time.time - previousShot > firerate)
             {
+                GameObject MuzzleFlash = Instantiate(muzzleFlash, barrel.transform.position, Gun.transform.rotation);
+                MuzzleFlash.transform.SetParent(barrel.transform);
+                MuzzleFlash.transform.Rotate(0, 0, Random.Range(-90, 90));
+                Destroy(MuzzleFlash, 0.1f);
                 //to do recoil
                 playerMove.recoil = recoil;
                 bullets -= 1; print(bullets);
@@ -79,6 +85,7 @@ public class Shoot : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, range))
                 {
                     GameObject partical = Instantiate(Hit, hit.point, transform.rotation);
+                   
                     Destroy(partical,1);
 
                     IDamageable HitObj = hit.collider.GetComponent<IDamageable>();
