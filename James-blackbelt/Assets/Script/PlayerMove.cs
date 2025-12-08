@@ -144,6 +144,7 @@ public class PlayerMove : MonoBehaviour
         //rotate camera only
         pov.transform.eulerAngles = camRotation - new Vector3(recoil, 0, 0);
         transform.eulerAngles = new Vector3(0, camRotation.y, 0);
+        rb.rotation = Quaternion.Euler(0, camRotation.y, 0);
     }
     void FixedUpdate()
     {
@@ -192,6 +193,7 @@ public class PlayerMove : MonoBehaviour
 
         }else
         {
+            Debug.DrawRay(transform.position, transform.forward);   
             move = (transform.forward * MovementSpeed* vertical) + (transform.right * SideMovementSpeed * horizontal);
             move = new Vector3(move.x, 0, move.z);
             rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
