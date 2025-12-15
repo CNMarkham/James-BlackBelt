@@ -58,7 +58,7 @@ public class Shoot : MonoBehaviour
 
 
         Debug.DrawRay(transform.position, transform.forward, Color.red, range);
-        if (Input.GetMouseButton(0) && Gun.activeInHierarchy && bullets > 0)
+        if (Input.GetMouseButton(0) && Gun.activeInHierarchy && bullets > 0 && canShoot == true)
         {
             if (Time.time - previousShot > firerate)
             {

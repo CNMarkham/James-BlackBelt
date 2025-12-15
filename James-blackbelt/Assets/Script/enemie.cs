@@ -48,7 +48,12 @@ public class enemie : MonoBehaviour, IDamageable
 
         if (PlayerFound == true)
         {
-            insurgent.transform.LookAt(facePlayer);
+            Vector3 targetPos = facePlayer.position;
+            if(targetPos.y > insurgent.transform.position.y)
+            {
+                targetPos.y = insurgent.transform.position.y;
+            }
+            insurgent.transform.LookAt(targetPos);
         }
         else if(!PlayerFound)
         {
