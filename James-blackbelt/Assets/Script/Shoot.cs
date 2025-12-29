@@ -79,7 +79,7 @@ public class Shoot : MonoBehaviour
                     flash = false;
                 }
 
-                m_Animator.SetTrigger("shoot");
+                m_Animator.SetTrigger("Shoot");
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, range))

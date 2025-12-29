@@ -88,22 +88,22 @@ public class PlayerMove : MonoBehaviour
             Gun2.transform.localScale = new Vector3(1, 1, 1);   
         }
 
-        if (Input.GetKeyDown("c"))
+        if (Input.GetKeyDown("z"))
         {
             gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         }
 
-        if (Input.GetKeyUp("c"))
+        if (Input.GetKeyUp("z"))
         {
             gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("c"))
         {
             gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
-        if (Input.GetKeyUp("z"))
+        if (Input.GetKeyUp("c"))
         {
             gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
